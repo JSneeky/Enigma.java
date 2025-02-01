@@ -15,6 +15,19 @@ public class Enigma {
         this.encrypt = encrypt.toCharArray();
     }
 
+    public void update(Rotor a, Rotor b, Rotor c) {
+        a.rotate(a.encrypt);
+        a.notch = a.notch + 1;
+        if (a.notch % 26 == 0) {
+            b.rotate(b.encrypt);
+            b.notch = b.notch + 1;
+        }
+        if (b.notch % 26 == 0) {
+            c.rotate(c.encrypt);
+            c.notch = c.notch + 1;
+        }
+    }
+
     public String encrypt() {
         this.rotor1.startPos();
         this.rotor2.startPos();
@@ -36,7 +49,7 @@ public class Enigma {
                 r1 = this.rotor2.rotor(r2, rotor1);
                 pb = this.plugboard.encrypt(r1);
                 output[i] = pb;
-                this.rotor1.update(this.rotor1, this.rotor2, this.rotor3);
+                this.update(this.rotor1, this.rotor2, this.rotor3);
             }
         }
         String s = new String(output);

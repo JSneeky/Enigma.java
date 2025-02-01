@@ -11,19 +11,6 @@ public class Rotor {
         this.encrypt = encrypt.toCharArray();
     }
 
-    public void update(Rotor a, Rotor b, Rotor c) {
-        a.rotate(a.encrypt);
-        a.notch = a.notch + 1;
-        if (a.notch % 26 == 0) {
-            b.rotate(b.encrypt);
-            b.notch = b.notch + 1;
-        }
-        if (b.notch % 26 == 0) {
-            c.rotate(c.encrypt);
-            c.notch = c.notch + 1;
-        }
-    }
-
     public void rotate(char[] encrypt) {
         char store = encrypt[25];
         char[] encStore = new char[26];

@@ -1,7 +1,7 @@
 module com.example.enigmagui {
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.desktop;
+    requires org.jetbrains.annotations;
 
 
     opens com.example.enigmagui to javafx.fxml;

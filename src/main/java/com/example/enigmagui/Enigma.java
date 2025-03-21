@@ -45,20 +45,19 @@ public class Enigma {
             if (encrypt[i] == ' ') output[i] = ' ';
             else {
                 char pb = plugboard.encrypt(encrypt[i]);
-                char r1 = rotor1.encrypt(pb);
-                char r2 = rotor1.encrypt(r1);
-                char r3 = rotor2.encrypt(r2);
+                char r1 = rotor1.encrypt(pb, rotor1);
+                char r2 = rotor1.encrypt(r1, rotor2);
+                char r3 = rotor2.encrypt(r2, rotor3);
                 char rf = reflector.encrypt(r3);
-                r3 = rotor3.encrypt(rf);
-                r2 = rotor3.encrypt(r3);
-                r1 = rotor2.encrypt(r2);
+                r3 = rotor3.encrypt(rf, rotor3);
+                r2 = rotor3.encrypt(r3, rotor2);
+                r1 = rotor2.encrypt(r2, rotor1);
                 pb = plugboard.encrypt(r1);
                 output[i] = pb;
                 update(rotor1, rotor2, rotor3);
             }
         }
-        String s = new String(output);
-        return s;
+        return new String(output);
     }
 
     /// Represents the Plugboard of an Enigma Machine
@@ -116,9 +115,7 @@ public class Enigma {
         private void rotate(char[] encrypt) {
             char store = encrypt[25];
             char[] encStore = new char[26];
-            for (int i = 0; i < 25; i++) {
-                encStore[i + 1] = encrypt[i];
-            }
+            System.arraycopy(encrypt, 0, encStore, 1, 25);
             encStore[0] = store;
             this.encrypt = encStore;
         }
@@ -131,9 +128,9 @@ public class Enigma {
         }
 
         /// Encrypts a given character
-        private char encrypt(char c) {
+        private char encrypt(char c, Rotor r) {
             for (int i = 0; i < 26; i++) {
-                if (encrypt[i] == c) return encrypt[i];
+                if (this.encrypt[i] == c) return r.encrypt[i];
             }
             return '/';
         }

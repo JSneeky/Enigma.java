@@ -133,7 +133,7 @@ public class Enigma {
         /// Encrypts a given character
         private char encrypt(char c) {
             for (int i = 0; i < 26; i++) {
-                if (encrypt[i] == c) return this.encrypt[i];
+                if (encrypt[i] == c) return encrypt[i];
             }
             return '/';
         }

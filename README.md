@@ -5,4 +5,4 @@ An implementation of an Enigma Machine in Java.
 
 The position fields control the starting positions of the rotorts. For Example, an input of 5 will
 rotate the rotor by 5 before the start of encryption.
-The notch fields control where the notch on each rootr is. For example an input of 21 for rotor 1 will mean that rotor 2 will rotate after 5 characters and then every 26 following that.
+The notch fields control where the notch on each rotor is. For example an input of 21 for rotor 1 will mean that rotor 2 will rotate after 5 characters and then every 26 following that.
